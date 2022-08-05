@@ -22,7 +22,7 @@ class BaseModel():
         self.created_at = datetime.utcnow()
         self.updated_at = datetime.utcnow()
 
-        if kwargs != None or  kwargs != {}:
+        if kwargs is not None or kwargs != {}:
             for key, value in kwargs.items():
                 if key == "created_at" or key == "updated_at":
                     value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
