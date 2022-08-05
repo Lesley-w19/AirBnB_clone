@@ -5,6 +5,7 @@ defines all common attributes/methods for other classes
 """
 import uuid
 from datetime import datetime
+import models
 
 
 class BaseModel():
@@ -27,6 +28,7 @@ class BaseModel():
                     value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                 if key != '__class__':
                     setattr(self, key, value)
+        models.storage.new(self)
 
     def __str__(self):
         """
@@ -41,6 +43,7 @@ class BaseModel():
         updated_at with the current datetime
         """
         self.updated_at = datetime.utcnow()
+        models.storage.save()
 
     def to_dict(self):
         """
