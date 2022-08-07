@@ -3,7 +3,7 @@
 ![image](https://user-images.githubusercontent.com/63022869/183305778-43a351fb-46ce-4b75-949b-75c72de9fad2.png)
 
 
-###: Writing a command interpreter to manage your AirBnB objects.
+### Writing a command interpreter to manage your AirBnB objects.
 ###### This is the first step towards building your first full web application: the AirBnB clone. This first step is very important because you will use what you build during this project with all other following projects: HTML/CSS templating, database storage, API, front-end integration…
 
 ###### Each task is linked and will help to:
@@ -50,7 +50,7 @@ e.g., For models/user.py, unit tests must be in: tests/test_models/test_user.py
 - All your classes should have a documentation (python3 -c 'print(__import__("my_module").MyClass.__doc__)')
 - All your functions (inside and outside a class) should have a documentation (python3 -c 'print(__import__("my_module").my_function.__doc__)' and python3 -c 'print(__import__("my_module").MyClass.my_function.__doc__)')
 
-
+### The Tasks commits include:
 0. README, AUTHORS
 1. Be pycodestyle compliant!
 2. Unittests
