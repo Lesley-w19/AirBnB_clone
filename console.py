@@ -5,6 +5,7 @@
 
 import cmd
 from models.base_model import BaseModel
+from models.user import User
 import json
 
 class HBNBCommand(cmd.Cmd):
@@ -12,7 +13,7 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
 
     """ --Classes """
-    __classes = ['BaseModel']
+    __classes = ['BaseModel', 'User']
 
 
     """ --Commands """
@@ -41,7 +42,7 @@ class HBNBCommand(cmd.Cmd):
         elif prmArg not in self.__classes:
             raise ValueError("** class doesn't exist **")
         else:
-            model_classes = {'BaseModel': BaseModel}
+            model_classes = {'BaseModel': BaseModel, 'User': User}
             my_model = model_classes[prmArg]()
             print(my_model.id)
             storage.save()    
@@ -141,7 +142,21 @@ class HBNBCommand(cmd.Cmd):
 
     def help_EOF(self):
         print("EOF(end of file) command to exit the program\n")
+    
+    def help_create(self):
+        print("Creates a new instance of BaseModel, saves it (to the JSON file) and prints the id.\n")
 
+    def help_show(self):
+        print("Prints the string representation of an instance based on the classname and id.\n")  
+
+    def help_destroy(self):
+        print("Deletes an instance based on the class name and id(save the change into the JSON file).\n")
+
+    def help_all(self):
+        print("Prints all the string representation of all instances based or not on the class name,\n")
+
+    def help_update(self):
+        print("Updates an instance based on the class name and id by \ adding or updating attribute (save the change into the JSON file).\n")
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

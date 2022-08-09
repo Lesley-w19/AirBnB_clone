@@ -7,7 +7,7 @@ Has a class FileStorage
 
 from genericpath import isfile
 import json
-from models.base_model import BaseModel
+""" from models.base_model import BaseModel """
 import os.path
 
 

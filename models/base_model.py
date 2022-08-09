@@ -5,7 +5,7 @@ defines all common attributes/methods for other classes
 """
 import uuid
 from datetime import datetime
-import models
+from models import storage
 
 
 class BaseModel():
