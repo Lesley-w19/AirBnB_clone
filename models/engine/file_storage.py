@@ -54,6 +54,6 @@ class FileStorage():
                 jso_line = o_file.read()
                 obj_ct = self.__objects
                 if jso_line:
-                    diction = json.load(jso_line)
+                    diction = json.loads(jso_line)
                     for key, value in diction.items():
-                        obj_ct[key] = eval(value['__class__'])(**value)
+                        obj_ct[key] = eval(value[__name__])(**value)

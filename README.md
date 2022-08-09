@@ -61,4 +61,5 @@ e.g., For models/user.py, unit tests must be in: tests/test_models/test_user.py
 6. Console 0.0.1
 7. Console 0.1
 8. First User
+9. More classes!
 >>>>>>> c28e085d9ac32b999e0521b5ef6d8d8f817bb20e
