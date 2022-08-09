@@ -46,6 +46,96 @@ class HBNBCommand(cmd.Cmd):
             print(my_model.id)
             storage.save()    
 
+    def do_show(self, prmArg):
+        """ prints the string representation of an instance based on the class name and id """
+
+        if not prmArg:
+            raise ValueError(" ** class name missing **")
+            return
+
+        prmArgs = prmArg.split(' ')
+
+        if prmArgs[0] not in self.__classses:
+            raise ValueError("** class doesn't exist **")
+        elif len(prmArgs) == 1:
+            raise ValueError("** instance id missing **")
+        else:
+            dict_obj = storage.all()
+            key = "{}.{}".format(prmArgs[0], prmArgs[1])
+            if key not in dict_obj:
+                raise ValueError("** no instance found **")
+
+            print(dict_obj[key])
+
+    def do_destroy(self, prmArgs):
+        """ deletes an instance based on the class name ad id """
+        if not prmArgs:
+            raise ValueError("** class name missing **")
+
+        args = prmArgs.split(' ')
+        
+        if args[0] not in self.__classes:
+            raise ValueError("** class doesn't exist **")
+        elif len(args) == 1:
+            raise ValueError("** instance id missing **")
+        else:
+            dict_obj = storage.all()
+            key = "{}.{}".format(args[0], args[1])
+            if key not in dict_obj:
+                raise ValueError("** no instance found **")
+
+            del dict_obj[key]
+            storage.save()
+
+    def do_all(self, prmArgs):
+        """ prints all string representarion of all instances based or not on the class name """
+        args = prmArgs.split(' ')
+        
+        if args and args[0] not in self.__classes:
+            raise ValueError("** class doesn't exist **")
+        
+        dict = storage.all()
+        list = []
+
+        for key, value in dict.items():
+            obj_name = value.__class__.__name__
+            if(not args or args[0] or obj_name == args[0]):
+                list += [value.__str__()]
+
+        print(list)
+
+    def do_update(self, prmArg):
+        """ updates an instance based on the class name and id by adding or updating attribute(save the change into JSONfile) """
+
+        if not prmArg:
+            raise ValueError("** class name missing **")
+
+        args = prmArg.split(' ')
+
+        className, command, attribute, value = args
+
+        if args[0] not in self.__classes:
+            raise ValueError("** class doesn't exist **")
+        if len(args) == 1:
+            raise ValueError("** instance id missing **")
+
+        dict_obj = storage.all()
+        key = "{}.{}".format(args[0], args[1])
+        if key not in dict_obj:
+            raise ValueError("** no instance found **")
+        obj_value = dict_obj[key]
+
+        if len(args) == 2:
+            raise ValueError("** attribute name is missing **")
+
+        if len(args) == 3:
+            raise ValueError("** value is missing **")
+
+        if attribute not in ("id", "create_at", "updated_at"):
+            setattr(obj_value, attribute, self.__type(value))
+
+            storage.save()
+
     def help_quit(self):
         print("Quit command to exit the program\n")
 
