@@ -22,3 +22,7 @@
 * [4-index.html](./4-index.html) - HTML page that displays a header, footer and a filters box with a search button.
 * [4-common.css](./styles/4-common.css)
 * [4-filters.css](./styles/4-filters.css)
+
+## File associated with 5:
+* [5-index.html](./5-index.html) - HTML page that displays a header, footer and a filters box.
+* [5-filters.css](./styles/5-filters.css)
