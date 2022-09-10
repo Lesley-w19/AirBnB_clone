@@ -4,11 +4,12 @@ from models.base_model import BaseModel
 
 
 class City(BaseModel):
-    """ public city class attributes """
+    """public city class attributes"""
+
     state_id = ""
     name = ""
 
     def __init__(self, *prmArg, **prmKwArg):
-        """ constructor """
+        """constructor"""
 
-        super(). __init__(*prmArg, **prmKwArg)
+        super().__init__(*prmArg, **prmKwArg)

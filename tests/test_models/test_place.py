@@ -5,16 +5,17 @@ import unittest
 import datetime
 from models.place import Place
 
+
 class TestPlace(unittest.TestCase):
-     """Tests instances and methods from place class"""
+    """Tests instances and methods from place class"""
 
-     plce = Place()
+    plce = Place()
 
-      def test_class_exists(self):
+    def test_class_exists(self):
         """tests if class exists"""
         self.assertEqual(str(type(self.plce)), "<class 'models.place.Place'>")
 
-     def test_place_inheritance(self):
+    def test_place_inheritance(self):
         """test if Place is a subclass of BaseModel"""
         self.assertIsInstance(self.plce, Place)
 
@@ -51,6 +52,7 @@ class TestPlace(unittest.TestCase):
         self.assertIsInstance(self.plce.id, str)
         self.assertIsInstance(self.plce.created_at, datetime.datetime)
         self.assertIsInstance(self.plce.updated_at, datetime.datetime)
-        
+
+
 if __name__ == '__main__':
     unittest.main()

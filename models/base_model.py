@@ -6,10 +6,11 @@ from datetime import datetime
 
 class BaseModel:
     """
-        instantiation of: id, created_at and update_at
-        arguments: *args - pointer to list of commandline arguments
-        **kwargs - list to key, value arguements.
+    instantiation of: id, created_at and update_at
+    arguments: *args - pointer to list of commandline arguments
+    **kwargs - list to key, value arguements.
     """
+
     def __init__(self, *args, **kwargs):
         """Instatntiates a new model"""
         from models import storage

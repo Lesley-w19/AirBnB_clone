@@ -18,8 +18,9 @@ class FileStorage:
     """
     serializes instances to a JSON file and deserializes JSON file to instances
     """
+
     def __init__(self):
-        self.__file_path = 'file.json'
+        self.__file_path = "file.json"
         self.__objects = {}
 
     def all(self):
@@ -36,10 +37,10 @@ class FileStorage:
         self.__objects[ke_y] = obj
 
     def save(self):
-        """ save the objects dictionary into file
+        """save the objects dictionary into file
         make serializable dict objects
         """
-        with open(self.__file_path, 'w') as f:
+        with open(self.__file_path, "w") as f:
             o_dict = {}
             o_dict.update(self.__objects)
             for k, v in o_dict.items():
@@ -49,13 +50,19 @@ class FileStorage:
     def reload(self):
         """reload objects from file"""
 
-        clses = {'BaseModel': BaseModel, 'State': State, 'City': City,
-                 'Amenity': Amenity, 'Place': Place, 'Review': Review,
-                 'User': User}
+        clses = {
+            "BaseModel": BaseModel,
+            "State": State,
+            "City": City,
+            "Amenity": Amenity,
+            "Place": Place,
+            "Review": Review,
+            "User": User,
+        }
         try:
-            with open(self.__file_path, 'r', encoding='utf-8') as f:
+            with open(self.__file_path, "r", encoding="utf-8") as f:
                 o_dict = json.load(f)
                 for ky, valu in o_dict.items():
-                    self.new(clses[valu['__class__']](**valu))
+                    self.new(clses[valu["__class__"]](**valu))
         except FileNotFoundError:
             return

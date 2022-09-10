@@ -5,6 +5,7 @@ import unittest
 import datetime
 from models.state import State
 
+
 class TestState(unittest.TestCase):
     """ tests the instances and methods of the state.py """
     ste = State()
@@ -32,5 +33,6 @@ class TestState(unittest.TestCase):
         self.assertIsInstance(self.ste.created_at, datetime.datetime)
         self.assertIsInstance(self.ste.updated_at, datetime.datetime)
 
-if __name__ = '__main__':
+
+if __name__ == '__main__':
     unittest.main()

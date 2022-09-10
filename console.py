@@ -8,17 +8,17 @@ from models.base_model import BaseModel
 from models.user import User
 import json
 
+
 class HBNBCommand(cmd.Cmd):
-    """ Console prompt  """
+    """Console prompt"""
+
     prompt = "(hbnb) "
 
     """ --Classes """
-    __classes = ['BaseModel', 'User']
-
+    __classes = ["BaseModel", "User"]
 
     """ --Commands """
-    __commands = ['create', 'show', 'destroy', 'all', 'update']
-
+    __commands = ["create", "show", "destroy", "all", "update"]
 
     def emptyline(self):
         """do nothing when empty"""
@@ -31,30 +31,35 @@ class HBNBCommand(cmd.Cmd):
     def do_EOF(self, arg):
         """exits program when arg is EOF"""
         raise SystemExit
-    
+
     def do_create(self, prmArg):
         """
-        creates a new instance of BaseModel, 
+        creates a new instance of BaseModel,
         saves it to the JSON file and prints the id.
         """
+        from models import storage
         if not prmArg:
             raise ValueError("** class name missing **")
         elif prmArg not in self.__classes:
             raise ValueError("** class doesn't exist **")
         else:
-            model_classes = {'BaseModel': BaseModel, 'User': User}
+            model_classes = {"BaseModel": BaseModel, "User": User}
             my_model = model_classes[prmArg]()
             print(my_model.id)
-            storage.save()    
+            storage.save()
 
     def do_show(self, prmArg):
-        """ prints the string representation of an instance based on the class name and id """
+        from models import storage
+        """
+        prints the string representation of an
+        instance based on the class name and id
+        """
 
         if not prmArg:
             raise ValueError(" ** class name missing **")
             return
 
-        prmArgs = prmArg.split(' ')
+        prmArgs = prmArg.split(" ")
 
         if prmArgs[0] not in self.__classses:
             raise ValueError("** class doesn't exist **")
@@ -69,12 +74,13 @@ class HBNBCommand(cmd.Cmd):
             print(dict_obj[key])
 
     def do_destroy(self, prmArgs):
-        """ deletes an instance based on the class name ad id """
+        from models import storage
+        """deletes an instance based on the class name ad id"""
         if not prmArgs:
             raise ValueError("** class name missing **")
 
-        args = prmArgs.split(' ')
-        
+        args = prmArgs.split(" ")
+
         if args[0] not in self.__classes:
             raise ValueError("** class doesn't exist **")
         elif len(args) == 1:
@@ -89,29 +95,37 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
 
     def do_all(self, prmArgs):
-        """ prints all string representarion of all instances based or not on the class name """
-        args = prmArgs.split(' ')
-        
+        from models import storage
+        """
+        prints all string representarion of all instances based or
+        not on the class name
+        """
+        args = prmArgs.split(" ")
+
         if args and args[0] not in self.__classes:
             raise ValueError("** class doesn't exist **")
-        
+
         dict = storage.all()
         list = []
 
         for key, value in dict.items():
             obj_name = value.__class__.__name__
-            if(not args or args[0] or obj_name == args[0]):
+            if not args or args[0] or obj_name == args[0]:
                 list += [value.__str__()]
 
         print(list)
 
     def do_update(self, prmArg):
-        """ updates an instance based on the class name and id by adding or updating attribute(save the change into JSONfile) """
+        from models import storage
+        """
+        updates an instance based on the class name and
+        id by adding or updating attribute(save the change into JSONfile)
+        """
 
         if not prmArg:
             raise ValueError("** class name missing **")
 
-        args = prmArg.split(' ')
+        args = prmArg.split(" ")
 
         className, command, attribute, value = args
 
@@ -142,21 +156,37 @@ class HBNBCommand(cmd.Cmd):
 
     def help_EOF(self):
         print("EOF(end of file) command to exit the program\n")
-    
+
     def help_create(self):
-        print("Creates a new instance of BaseModel, saves it (to the JSON file) and prints the id.\n")
+        print(
+            "Creates a new instance of BaseModel, \
+                saves it (to the JSON file) and prints the id.\n"
+        )
 
     def help_show(self):
-        print("Prints the string representation of an instance based on the classname and id.\n")  
+        print(
+            "Prints the string representation \
+                of an instance based on the classname and id.\n"
+        )
 
     def help_destroy(self):
-        print("Deletes an instance based on the class name and id(save the change into the JSON file).\n")
+        print(
+            "Deletes an instance based on the class name and \
+                id(save the change into the JSON file).\n"
+        )
 
     def help_all(self):
-        print("Prints all the string representation of all instances based or not on the class name,\n")
+        print(
+            "Prints all the string representation of all \
+                instances based or not on the class name,\n"
+        )
 
     def help_update(self):
-        print("Updates an instance based on the class name and id by \ adding or updating attribute (save the change into the JSON file).\n")
+        print(
+            "Updates an instance based on the class name and id by  adding \
+                or updating attribute (save the change into the JSON file).\n"
+        )
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     HBNBCommand().cmdloop()

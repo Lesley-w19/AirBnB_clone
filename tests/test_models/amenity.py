@@ -22,10 +22,10 @@ class TestAmenity(unittest.TestCase):
 
     def testHasAttributes(self):
         """verify if attributes exist"""
-        self.assertTrue(hasattr(self.a, 'name'))
-        self.assertTrue(hasattr(self.a, 'id'))
-        self.assertTrue(hasattr(self.a, 'created_at'))
-        self.assertTrue(hasattr(self.a, 'updated_at'))
+        self.assertTrue(hasattr(self.a, "name"))
+        self.assertTrue(hasattr(self.a, "id"))
+        self.assertTrue(hasattr(self.a, "created_at"))
+        self.assertTrue(hasattr(self.a, "updated_at"))
 
     def test_types(self):
         """tests if the type of the attribute is the correct one"""
@@ -34,5 +34,6 @@ class TestAmenity(unittest.TestCase):
         self.assertIsInstance(self.a.created_at, datetime.datetime)
         self.assertIsInstance(self.a.updated_at, datetime.datetime)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()
