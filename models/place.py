@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
-from models.base_model from BaseModel
+from models.base_model import BaseModel
+
 
 class Place(BaseModel):
     """ public place class attributes """

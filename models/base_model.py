@@ -22,8 +22,8 @@ class BaseModel:
                 else:
                     self.__dict__[ky] = valu
 
-        self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
+        self.id = str(uuid.uuid4())
         self.updated_at = datetime.now()
         storage.new(self)
 

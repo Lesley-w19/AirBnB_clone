@@ -34,3 +34,7 @@
 ## Files associated with 7:
 * [7-index.html](./7-index.html) -  HTML page that displays a header, footer, a filters box with dropdown and results.
 * [7-places.css]
+
+## Files associate with 8:
+* [8-index.html](./8-index.html) - HTML page that displays a header, a footer, a filter box (dropdown list) and the result of the search.
+* [8-index.html](./styles/8-places.css)

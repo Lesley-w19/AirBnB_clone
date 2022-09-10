@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
-from modelsbase_model import BaseModel
+from models.base_model import BaseModel
+
 
 class Review(BaseModel):
     """ public review class attributes """
@@ -10,4 +11,4 @@ class Review(BaseModel):
 
     def __init__(self, *prmArg, **prmKwArg):
         """ Constructor """
-        super().__init__(*prmArg, **prmKArg)
+        super().__init__(*prmArg, **prmKwArg)
