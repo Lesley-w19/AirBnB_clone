@@ -1,50 +1,36 @@
 #!/usr/bin/python3
-"""
-base_model:
-defines all common attributes/methods for other classes
-"""
-
+"""This module defines a base class for all models in our hbnb clone"""
 import uuid
 from datetime import datetime
-
-# from models import storage
 
 
 class BaseModel:
     """
-    common attributes/methods
-    """
-
-    def __init__(self, *args, **kwargs):
-        """
         instantiation of: id, created_at and update_at
         arguments: *args - pointer to list of commandline arguments
         **kwargs - list to key, value arguements.
-        """
+    """
+    def __init__(self, *args, **kwargs):
+        """Instatntiates a new model"""
+        from models import storage
 
-        if kwargs is not None and kwargs != {}:
-            time_frmt = "%Y-%m-%dT%H:%M:%S.%f"
-            for key, value in kwargs:
-                if key == "created_at":
-                    self.__dict__["created_at"] = datetime.strptime(
-                        value, time_frmt)
-                elif key == "updated_at":
-                    self.__dict__["updated_at"] = datetime.strptime(
-                        value, time_frmt)
+        if kwargs:
+            for ky, valu in kwargs.items():
+                if ky == "created_at" or ky == "updated_at":
+                    self.__dict__[ky] = datetime.strptime(
+                        valu, "%Y-%m-%dT%H:%M:%S.%f")
                 else:
-                    self.__dict__[key] = kwargs[key]
-        else:
-            self.id = str(uuid.uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
+                    self.__dict__[ky] = valu
 
-    #            storage.new(self)
+        self.id = str(uuid.uuid4())
+        self.created_at = datetime.now()
+        self.updated_at = datetime.now()
+        storage.new(self)
 
     def __str__(self):
         """
         Returns: instance of BaseModel
         """
-
         return "[{}] ({}) {}".format(
             type(self).__name__, self.id, self.__dict__)
 
@@ -53,13 +39,15 @@ class BaseModel:
         updates the public instance attribute
         updated_at with the current datetime
         """
+        from models import storage
 
         self.updated_at = datetime.now()
-
-    #        storage.save()
+        storage.save()
 
     def to_dict(self):
-        """Returns a dictionary representation of an instance."""
+        """
+        Returns a dictionary representation of an instance.
+        """
 
         my_dict = self.__dict__.copy()
         my_dict["__class__"] = type(self).__name__

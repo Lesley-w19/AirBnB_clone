@@ -4,19 +4,22 @@ file_storage:
 Has a class FileStorage
 """
 
-
-from genericpath import isfile
 import json
-""" from models.base_model import BaseModel """
-import os.path
+from models.base_model import BaseModel
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
+from models.user import User
 
 
-class FileStorage():
+class FileStorage:
     """
     serializes instances to a JSON file and deserializes JSON file to instances
     """
     def __init__(self):
-        self.__file_path = "file.json"
+        self.__file_path = 'file.json'
         self.__objects = {}
 
     def all(self):
@@ -29,31 +32,29 @@ class FileStorage():
         """
         sets in __objects the obj with key <obj class name>.id
         """
-        self.__objects["{}.{}".format(self.__class__.__name__, obj.id)] = obj
+        ke_y = "{}.{}".format(obj.__class__.__name__, obj.id)
+        self.__objects[ke_y] = obj
 
     def save(self):
-        """
-        serializes __objects to the JSON file (path: __file_path)
+        """ save the objects dictionary into file
+        make serializable dict objects
         """
         o_dict = {}
         with open(self.__file_path, "w", encoding="utf-8") as f:
-            for key, value in self.__objects.items():
-                o_dict = {key: value.to_dict()}
-
+            for ke_y, valu_e in self.__objects.items():
+                o_dict = {ke_y: valu_e.to_dict()}
             json.dump(o_dict, f)
 
     def reload(self):
-        """"
-        deserializes the JSON file to __objects
-        (only if the JSON file (__file_path) exists
-        otherwise, do nothing. If the file doesnt exist,
-        no exception should be raised
-        """
-        if os.path.isfile(self.__file_path):
-            with open(self.__file_path) as o_file:
-                jso_line = o_file.read()
-                obj_ct = self.__objects
-                if jso_line:
-                    diction = json.loads(jso_line)
-                    for key, value in diction.items():
-                        obj_ct[key] = eval(value[__name__])(**value)
+        """reload objects from file"""
+
+        clses = {'BaseModel': BaseModel, 'State': State, 'City': City,
+                   'Amenity': Amenity, 'Place': Place, 'Review': Review,
+                   'User': User}
+        try:
+            with open(self.__file_path, 'r', encoding='utf-8') as f:
+                o_dict = json.load(f)
+                for ky, valu in o_dict.items():
+                    self.new(clses[valu['__class__']](**valu))
+        except FileNotFoundError:
+            return
