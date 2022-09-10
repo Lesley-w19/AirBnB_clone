@@ -39,18 +39,19 @@ class FileStorage:
         """ save the objects dictionary into file
         make serializable dict objects
         """
-        o_dict = {}
-        with open(self.__file_path, "w", encoding="utf-8") as f:
-            for ke_y, valu_e in self.__objects.items():
-                o_dict = {ke_y: valu_e.to_dict()}
+        with open(self.__file_path, 'w') as f:
+            o_dict = {}
+            o_dict.update(self.__objects)
+            for k, v in o_dict.items():
+                o_dict[k] = v.to_dict()
             json.dump(o_dict, f)
 
     def reload(self):
         """reload objects from file"""
 
         clses = {'BaseModel': BaseModel, 'State': State, 'City': City,
-                   'Amenity': Amenity, 'Place': Place, 'Review': Review,
-                   'User': User}
+                 'Amenity': Amenity, 'Place': Place, 'Review': Review,
+                 'User': User}
         try:
             with open(self.__file_path, 'r', encoding='utf-8') as f:
                 o_dict = json.load(f)
