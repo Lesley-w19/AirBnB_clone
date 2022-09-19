@@ -14,3 +14,4 @@
 9. Full details
 10. Flex
 11. Responsive design
+12. Accessibility
