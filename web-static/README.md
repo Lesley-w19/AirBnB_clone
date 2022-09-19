@@ -12,3 +12,4 @@
 7. Display results
 8. More details
 9. Full details
+10. Flex
