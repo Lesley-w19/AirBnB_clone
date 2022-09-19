@@ -11,3 +11,4 @@
 6. It's (h)over
 7. Display results
 8. More details
+9. Full details
