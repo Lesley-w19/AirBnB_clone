@@ -30,9 +30,9 @@ class BaseModel:
 
     def __str__(self):
         """
-        Returns: instance of BaseModel
+        Returns: string instance of BaseModel
         """
-        return "[{}] ({}) {}".format(
+        return "[{:s}] ({:s}) {}".format(
             type(self).__name__, self.id, self.__dict__)
 
     def save(self):
@@ -43,6 +43,7 @@ class BaseModel:
         from models import storage
 
         self.updated_at = datetime.now()
+        storage.new(self)
         storage.save()
 
     def to_dict(self):
